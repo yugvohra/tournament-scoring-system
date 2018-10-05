@@ -9,16 +9,20 @@ public class Game {
   private Set<GamePoint> points;
   private Set<Player> participatingPlayers;
 
-  public Game(String gameId, Player first, Player second) {
+  public Game(String gameId, Player playerOne, Player playerTwo) {
     this.gameId = gameId;
-    initializeGame(first, second);
+    initializeGame(playerOne, playerTwo);
   }
 
-  private void initializeGame(Player first, Player second) {
+  public Game(Player playerOne, Player playerTwo) {
+    this(String.format("%s VS %s", playerOne.getName(), playerTwo.getName()), playerOne, playerTwo);
+  }
+
+  private void initializeGame(Player playerOne, Player playerTwo) {
     points = new HashSet<>(16);
     participatingPlayers = new HashSet<>(16);
-    participatingPlayers.add(first);
-    participatingPlayers.add(second);
+    participatingPlayers.add(playerOne);
+    participatingPlayers.add(playerTwo);
   }
 
   public String getGameId() {
