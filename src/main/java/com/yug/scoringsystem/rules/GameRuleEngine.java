@@ -19,8 +19,13 @@ public class GameRuleEngine {
   public GameState determineGameState(Game aGame) {
     Optional<Player> leadingPlayer = aGame.getLeadingPlayer();
     Long lead = aGame.getLead();
-    if (leadingPlayer.isPresent() && lead == 0)
+    if (!leadingPlayer.isPresent() || aGame.getPlayerScore(leadingPlayer.get()) < 4)
+      return GameState.UNDECIDED;
+    else if (lead == 0)
       return GameState.DEUCE;
-    return GameState.UNDECIDED;
+    else if (lead == 1)
+      return GameState.ADVANTAGE;
+    else
+      return GameState.WON;
   }
 }
