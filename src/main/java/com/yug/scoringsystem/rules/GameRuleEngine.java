@@ -2,6 +2,9 @@ package com.yug.scoringsystem.rules;
 
 import com.yug.scoringsystem.domain.Game;
 import com.yug.scoringsystem.domain.GameState;
+import com.yug.scoringsystem.domain.Player;
+
+import java.util.Optional;
 
 public class GameRuleEngine {
   private static GameRuleEngine INSTANCE = new GameRuleEngine();
@@ -14,6 +17,10 @@ public class GameRuleEngine {
   }
 
   public GameState determineGameState(Game aGame) {
-    return aGame.getLead() < 2 ? GameState.UNDECIDED : null;
+    Optional<Player> leadingPlayer = aGame.getLeadingPlayer();
+    Long lead = aGame.getLead();
+    if (leadingPlayer.isPresent() && lead == 0)
+      return GameState.DEUCE;
+    return GameState.UNDECIDED;
   }
 }
