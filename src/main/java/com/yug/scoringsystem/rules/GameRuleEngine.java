@@ -14,6 +14,6 @@ public class GameRuleEngine {
   }
 
   public GameState determineGameState(Game aGame) {
-    return null;
+    return aGame.getLead() < 2 ? GameState.UNDECIDED : null;
   }
 }

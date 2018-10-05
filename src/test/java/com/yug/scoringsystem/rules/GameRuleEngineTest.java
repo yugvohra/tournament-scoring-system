@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameRuleEngineTest {
@@ -21,8 +22,8 @@ public class GameRuleEngineTest {
   public void shouldReturnUndecidedStateForOngoingGame()
   {
     //given
-
     GameRuleEngine gameRuleEngine=GameRuleEngine.getInstance();
+    when(aGame.getLead()).thenReturn(1L);
     //when
     GameState fetchedState=gameRuleEngine.determineGameState(aGame);
     assertThat(fetchedState).isEqualTo(GameState.UNDECIDED);

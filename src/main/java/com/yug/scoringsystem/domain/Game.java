@@ -10,14 +10,14 @@ public class Game {
   private Set<GamePoint> points;
   private GameScore gameScore;
 
-  public Game(String gameId, Player playerOne, Player playerTwo) {
+  Game(String gameId, Player playerOne, Player playerTwo) {
     this.gameId = gameId;
     this.playerOne = playerOne;
     this.playerTwo = playerTwo;
     initializeGame();
   }
 
-  public Game(Player playerOne, Player playerTwo) {
+  Game(Player playerOne, Player playerTwo) {
     this(String.format("%s VS %s", playerOne.getName(), playerTwo.getName()), playerOne, playerTwo);
   }
 
@@ -27,76 +27,102 @@ public class Game {
     gameScore = new GameScore();
   }
 
-  public Player getPlayerOne() {
+  private Player getPlayerOne() {
     return playerOne;
   }
 
-  public Player getPlayerTwo() {
+  private Player getPlayerTwo() {
     return playerTwo;
   }
 
-  public String getGameId() {
+  String getGameId() {
     return gameId;
   }
 
-  public Set<GamePoint> getPoints() {
+  Set<GamePoint> getPoints() {
     return points;
   }
 
-  public void addAPoint(GamePoint aPoint) {
+  void addAPoint(GamePoint aPoint) {
     points.add(aPoint);
     this.getGameScore().addPoint(aPoint);
   }
 
-  public Optional<Player> getLeadingPlayer()
-  {
+  public Optional<Player> getLeadingPlayer() {
     return Optional.ofNullable(getGameScore().getLeadPlayer());
   }
 
-  public Long getPlayerScore(Player aPlayer)
-  {
+  public Long getPlayerScore(Player aPlayer) {
     return getGameScore().getPlayerScores(aPlayer);
   }
 
-  public GameScore getGameScore() {
+  private GameScore getGameScore() {
     return gameScore;
+  }
+
+  public Long getLead() {
+    return getGameScore().getLead();
   }
 
   /**
    * AuxillaaryClass for holding the scores and lead. This helps in quick lookup
    */
   private class GameScore {
-    private Map<Player, Long> playerScores;
-    private Player leadPlayer;
+    Map<Player, Long> playerScores;
+    Player leadPlayer;
+    Long lead;
 
-    public GameScore() {
+    GameScore() {
       initialize();
     }
 
-    public void initialize() {
+    void initialize() {
+      lead = 0L;
       playerScores = new HashMap<>();
-      playerScores.put(getPlayerOne(), 0l);
-      playerScores.put(getPlayerTwo(), 0l);
+      playerScores.put(getPlayerOne(), 0L);
+      playerScores.put(getPlayerTwo(), 0L);
     }
 
-    public Player getLeadPlayer() {
+    Player getLeadPlayer() {
       return leadPlayer;
     }
 
 
-    public Long getPlayerScores(Player aPlayer) {
+    Long getPlayerScores(Player aPlayer) {
       return playerScores.get(aPlayer);
     }
 
-    public void addPoint(GamePoint aPoint) {
-      adJustLead(aPoint.getScoringPlayer());
+    public Long getLead() {
+      return lead;
     }
 
-    private void adJustLead(Player scoringPlayer) {
-      Long currentScore = playerScores.get(scoringPlayer);
-      currentScore++;
-      leadPlayer = leadPlayer == null || currentScore > playerScores.get(leadPlayer) ? scoringPlayer : leadPlayer;
-      playerScores.put(scoringPlayer,currentScore);
+    void addPoint(GamePoint aPoint) {
+      adjustScoreBoard(aPoint.getScoringPlayer());
+    }
+
+    /**
+     * TODO
+     * Make it thread safe
+     *
+     * @param scoringPlayer
+     */
+    private void adjustScoreBoard(Player scoringPlayer) {
+      Long playerScore = playerScores.get(scoringPlayer);
+      playerScore++;
+      if (leadPlayer == null || playerScore > playerScores.get(leadPlayer)) {
+        leadPlayer = scoringPlayer;
+        lead++;
+      } else {
+        lead--;
+      }
+      playerScores.put(scoringPlayer, playerScore);
+    }
+
+    private void adjustLead(Player scoringPlayer) {
+      if (leadPlayer.equals(scoringPlayer))
+        lead++;
+      else
+        lead--;
     }
   }
 

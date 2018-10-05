@@ -72,4 +72,46 @@ public class GameTest {
     assertThat(game.getPlayerScore(secondPlayer)).isEqualTo(1);
     assertThat(game.getLeadingPlayer().get()).isEqualTo(firstPlayer);
   }
+
+  @Test
+  public void shouldReturn_ZeroLead_AtGameStart() {
+    //given
+    Player firstPlayer = new Player("player one", "1");
+    Player secondPlayer = new Player("player Two", "2");
+    Game game = new Game("game1", firstPlayer, secondPlayer);
+    //when
+    //then
+    assertThat(game.getLead()).isEqualTo(0L);
+  }
+
+  @Test
+  public void shouldReturnCorrectLead() {
+    //given
+    Player firstPlayer = new Player("player one", "1");
+    Player secondPlayer = new Player("player Two", "2");
+    Game game = new Game("game1", firstPlayer, secondPlayer);
+    //when
+    game.addAPoint(new GamePoint(firstPlayer));
+    game.addAPoint(new GamePoint(firstPlayer));
+    game.addAPoint(new GamePoint(firstPlayer));
+    game.addAPoint(new GamePoint(secondPlayer));
+    //then
+    assertThat(game.getLead()).isEqualTo(2L);
+  }
+
+  @Test
+  public void shouldSwapAndReturnCorrectLead() {
+    //given
+    Player firstPlayer = new Player("player one", "1");
+    Player secondPlayer = new Player("player Two", "2");
+    Game game = new Game("game1", firstPlayer, secondPlayer);
+    //when
+    game.addAPoint(new GamePoint(firstPlayer));
+    game.addAPoint(new GamePoint(firstPlayer));
+    game.addAPoint(new GamePoint(secondPlayer));
+    game.addAPoint(new GamePoint(secondPlayer));
+    game.addAPoint(new GamePoint(secondPlayer));
+    //then
+    assertThat(game.getLead()).isEqualTo(1L);
+  }
 }
