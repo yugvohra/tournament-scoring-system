@@ -27,4 +27,4 @@ target/
 logs/
 cardmanagement.iml
 .idea/*
-
+*.iml
