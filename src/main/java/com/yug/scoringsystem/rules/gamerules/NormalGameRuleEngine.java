@@ -7,13 +7,13 @@ import com.yug.scoringsystem.domain.Player;
 
 import java.util.Optional;
 
-public class GameRuleEngine {
-  private static GameRuleEngine INSTANCE = new GameRuleEngine();
+public class NormalGameRuleEngine implements IGameRuleEngine {
+  private static NormalGameRuleEngine INSTANCE = new NormalGameRuleEngine();
 
-  private GameRuleEngine() {
+  private NormalGameRuleEngine() {
   }
 
-  public static GameRuleEngine getInstance() {
+  public static NormalGameRuleEngine getInstance() {
     return INSTANCE;
   }
 
