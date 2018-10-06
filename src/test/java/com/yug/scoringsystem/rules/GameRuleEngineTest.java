@@ -37,8 +37,6 @@ public class GameRuleEngineTest {
     //when
     GameStatus fetchedStatus = gameRuleEngine.determineGameState(aGame);
     assertThat(fetchedStatus.getGameState()).isEqualTo(GameState.UNDECIDED);
-    assertThat(fetchedStatus.getGameScore()).isEqualTo(GameState.UNDECIDED);
-
   }
 
   @Test
@@ -49,8 +47,8 @@ public class GameRuleEngineTest {
     when(aGameScore.getLeadPlayer()).thenReturn(Optional.empty());
 
     //when
-    GameStatus fetchedState = gameRuleEngine.determineGameState(aGame);
-    assertThat(fetchedState).isEqualTo(GameState.UNDECIDED);
+    GameStatus fetchedStatus = gameRuleEngine.determineGameState(aGame);
+    assertThat(fetchedStatus.getGameState()).isEqualTo(GameState.UNDECIDED);
 
   }
 
@@ -63,8 +61,8 @@ public class GameRuleEngineTest {
 
     when(aGameScore.getLeadPlayer()).thenReturn(Optional.of(new Player("player one", "1")));
     //when
-    GameStatus fetchedState = gameRuleEngine.determineGameState(aGame);
-    assertThat(fetchedState).isEqualTo(GameState.DEUCE);
+    GameStatus fetchedStatus = gameRuleEngine.determineGameState(aGame);
+    assertThat(fetchedStatus.getGameState()).isEqualTo(GameState.DEUCE);
 
   }
 
@@ -77,8 +75,8 @@ public class GameRuleEngineTest {
 
     when(aGameScore.getLeadPlayer()).thenReturn(Optional.of(new Player("player one", "1")));
     //when
-    GameStatus fetchedState = gameRuleEngine.determineGameState(aGame);
-    assertThat(fetchedState).isEqualTo(GameState.ADVANTAGE);
+    GameStatus fetchedStatus = gameRuleEngine.determineGameState(aGame);
+    assertThat(fetchedStatus.getGameState()).isEqualTo(GameState.ADVANTAGE);
 
   }
 
@@ -91,8 +89,8 @@ public class GameRuleEngineTest {
 
     when(aGameScore.getLeadPlayer()).thenReturn(Optional.of(new Player("player one", "1")));
     //when
-    GameStatus fetchedState = gameRuleEngine.determineGameState(aGame);
-    assertThat(fetchedState).isEqualTo(GameState.WON);
+    GameStatus fetchedStatus = gameRuleEngine.determineGameState(aGame);
+    assertThat(fetchedStatus.getGameState()).isEqualTo(GameState.WON);
 
   }
 
