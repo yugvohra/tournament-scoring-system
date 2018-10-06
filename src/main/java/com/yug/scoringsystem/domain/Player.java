@@ -17,18 +17,12 @@ public class Player {
   }
 
   private final String Name;
-  private final String playerId;
 
-  public Player(String name, String playerId) {
+  public Player(String name) {
     Name = name;
-    this.playerId = playerId;
   }
 
   public String getName() {
     return Name;
-  }
-
-  public String getPlayerId() {
-    return playerId;
   }
 }

@@ -1,6 +1,9 @@
-package com.yug.scoringsystem.domain;
+package com.yug.scoringsystem.domain.game;
 
-public class GamePoint {
+import com.yug.scoringsystem.domain.IScoredPoint;
+import com.yug.scoringsystem.domain.Player;
+
+public class GamePoint implements IScoredPoint {
   /**
    * Maintaining Bilateral relationship for the time being
    */

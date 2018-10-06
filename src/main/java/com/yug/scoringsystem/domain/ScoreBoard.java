@@ -1,5 +1,7 @@
 package com.yug.scoringsystem.domain;
 
+import com.yug.scoringsystem.domain.game.GamePoint;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -9,12 +11,12 @@ import java.util.stream.Collectors;
 /**
  * AuxillaaryClass for holding the scores and lead. This helps in quick lookup
  */
-public class GameScore {
+public class ScoreBoard<T extends IScoredPoint> {
   private Map<Player, Long> playerScores;
   private Player leadPlayer;
   private Long lead;
 
-  GameScore(List<Player> participatingPlayers) {
+  public ScoreBoard(List<Player> participatingPlayers) {
     initialize(participatingPlayers);
   }
 
@@ -36,7 +38,11 @@ public class GameScore {
     return lead;
   }
 
-  void addPoint(GamePoint aPoint) {
+  public Set<Player> getParticipatingPlayers(){
+    return playerScores.keySet();
+  }
+
+  public void addPoint(T aPoint) {
     adjustScoreBoard(aPoint.getScoringPlayer());
   }
 
@@ -56,9 +62,5 @@ public class GameScore {
       lead--;
     }
     playerScores.put(scoringPlayer, playerScore);
-  }
-
-  public Set<Player> getParticipatingPlayers(){
-    return playerScores.keySet();
   }
 }
