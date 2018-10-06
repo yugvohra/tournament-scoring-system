@@ -1,9 +1,8 @@
 package com.yug.scoringsystem.rules;
 
 
-import com.yug.scoringsystem.domain.Game;
-import com.yug.scoringsystem.domain.GameState;
-import com.yug.scoringsystem.domain.Player;
+import com.yug.scoringsystem.domain.*;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -20,16 +19,25 @@ public class GameRuleEngineTest {
 
   @Mock
   Game aGame;
+  @Mock
+  GameScore aGameScore;
+
+  @Before
+  public void setUp() {
+    when(aGame.getGameScore()).thenReturn(aGameScore);
+    when(aGameScore.getPlayerScore(any())).thenReturn(3L);
+    when(aGameScore.getLeadPlayer()).thenReturn(Optional.of(new Player("player one", "1")));
+
+  }
 
   @Test
   public void shouldReturnUndecidedStateForOngoingGame() {
     //given
     GameRuleEngine gameRuleEngine = GameRuleEngine.getInstance();
-    when(aGame.getPlayerScore(any())).thenReturn(3L);
-    when(aGame.getLeadingPlayer()).thenReturn(Optional.of(new Player("player one", "1")));
     //when
-    GameState fetchedState = gameRuleEngine.determineGameState(aGame);
-    assertThat(fetchedState).isEqualTo(GameState.UNDECIDED);
+    GameStatus fetchedStatus = gameRuleEngine.determineGameState(aGame);
+    assertThat(fetchedStatus.getGameState()).isEqualTo(GameState.UNDECIDED);
+    assertThat(fetchedStatus.getGameScore()).isEqualTo(GameState.UNDECIDED);
 
   }
 
@@ -37,11 +45,11 @@ public class GameRuleEngineTest {
   public void shouldReturnUndecidedStateForJustStartedGame() {
     //given
     GameRuleEngine gameRuleEngine = GameRuleEngine.getInstance();
-    when(aGame.getLead()).thenReturn(0L);
-    when(aGame.getLeadingPlayer()).thenReturn(Optional.empty());
+    when(aGameScore.getLead()).thenReturn(0L);
+    when(aGameScore.getLeadPlayer()).thenReturn(Optional.empty());
 
     //when
-    GameState fetchedState = gameRuleEngine.determineGameState(aGame);
+    GameStatus fetchedState = gameRuleEngine.determineGameState(aGame);
     assertThat(fetchedState).isEqualTo(GameState.UNDECIDED);
 
   }
@@ -50,12 +58,12 @@ public class GameRuleEngineTest {
   public void shouldReturnDeuceForEqualScores() {
     //given
     GameRuleEngine gameRuleEngine = GameRuleEngine.getInstance();
-    when(aGame.getLead()).thenReturn(0L);
-    when(aGame.getPlayerScore(any())).thenReturn(5L);
+    when(aGameScore.getLead()).thenReturn(0L);
+    when(aGameScore.getPlayerScore(any())).thenReturn(5L);
 
-    when(aGame.getLeadingPlayer()).thenReturn(Optional.of(new Player("player one", "1")));
+    when(aGameScore.getLeadPlayer()).thenReturn(Optional.of(new Player("player one", "1")));
     //when
-    GameState fetchedState = gameRuleEngine.determineGameState(aGame);
+    GameStatus fetchedState = gameRuleEngine.determineGameState(aGame);
     assertThat(fetchedState).isEqualTo(GameState.DEUCE);
 
   }
@@ -64,12 +72,12 @@ public class GameRuleEngineTest {
   public void shouldReturnAdvantageWhenPlayerHasIt() {
     //given
     GameRuleEngine gameRuleEngine = GameRuleEngine.getInstance();
-    when(aGame.getLead()).thenReturn(1L);
-    when(aGame.getPlayerScore(any())).thenReturn(5L);
+    when(aGameScore.getLead()).thenReturn(1L);
+    when(aGameScore.getPlayerScore(any())).thenReturn(5L);
 
-    when(aGame.getLeadingPlayer()).thenReturn(Optional.of(new Player("player one", "1")));
+    when(aGameScore.getLeadPlayer()).thenReturn(Optional.of(new Player("player one", "1")));
     //when
-    GameState fetchedState = gameRuleEngine.determineGameState(aGame);
+    GameStatus fetchedState = gameRuleEngine.determineGameState(aGame);
     assertThat(fetchedState).isEqualTo(GameState.ADVANTAGE);
 
   }
@@ -78,12 +86,12 @@ public class GameRuleEngineTest {
   public void shouldReturnWonWhenGameEnds() {
     //given
     GameRuleEngine gameRuleEngine = GameRuleEngine.getInstance();
-    when(aGame.getLead()).thenReturn(2L);
-    when(aGame.getPlayerScore(any())).thenReturn(5L);
+    when(aGameScore.getLead()).thenReturn(2L);
+    when(aGameScore.getPlayerScore(any())).thenReturn(5L);
 
-    when(aGame.getLeadingPlayer()).thenReturn(Optional.of(new Player("player one", "1")));
+    when(aGameScore.getLeadPlayer()).thenReturn(Optional.of(new Player("player one", "1")));
     //when
-    GameState fetchedState = gameRuleEngine.determineGameState(aGame);
+    GameStatus fetchedState = gameRuleEngine.determineGameState(aGame);
     assertThat(fetchedState).isEqualTo(GameState.WON);
 
   }

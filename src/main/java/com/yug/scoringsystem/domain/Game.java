@@ -1,20 +1,20 @@
 package com.yug.scoringsystem.domain;
 
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Game {
   private final String gameId;
-  private final Player playerOne;
-  private final Player playerTwo;
+  private List<Player> participatingPlayers;
   private Set<GamePoint> points;
   private GameScore gameScore;
 
   Game(String gameId, Player playerOne, Player playerTwo) {
     this.gameId = gameId;
-    this.playerOne = playerOne;
-    this.playerTwo = playerTwo;
-    initializeGame();
+    initializeGame(playerOne, playerTwo);
   }
 
   Game(Player playerOne, Player playerTwo) {
@@ -22,17 +22,16 @@ public class Game {
   }
 
 
-  private void initializeGame() {
+  private void initializeGame(Player playerOne, Player playerTwo) {
     points = new HashSet<>(16);
-    gameScore = new GameScore();
+    participatingPlayers = new ArrayList<>();
+    participatingPlayers.add(playerOne);
+    participatingPlayers.add(playerTwo);
+    gameScore = new GameScore(participatingPlayers);
   }
 
-  private Player getPlayerOne() {
-    return playerOne;
-  }
-
-  private Player getPlayerTwo() {
-    return playerTwo;
+  public List<Player> getParticipatingPlayers() {
+    return this.participatingPlayers;
   }
 
   String getGameId() {
@@ -48,82 +47,8 @@ public class Game {
     this.getGameScore().addPoint(aPoint);
   }
 
-  public Optional<Player> getLeadingPlayer() {
-    return Optional.ofNullable(getGameScore().getLeadPlayer());
-  }
-
-  public Long getPlayerScore(Player aPlayer) {
-    return getGameScore().getPlayerScores(aPlayer);
-  }
-
-  private GameScore getGameScore() {
+  public GameScore getGameScore() {
     return gameScore;
-  }
-
-  public Long getLead() {
-    return getGameScore().getLead();
-  }
-
-  /**
-   * AuxillaaryClass for holding the scores and lead. This helps in quick lookup
-   */
-  private class GameScore {
-    Map<Player, Long> playerScores;
-    Player leadPlayer;
-    Long lead;
-
-    GameScore() {
-      initialize();
-    }
-
-    void initialize() {
-      lead = 0L;
-      playerScores = new HashMap<>();
-      playerScores.put(getPlayerOne(), 0L);
-      playerScores.put(getPlayerTwo(), 0L);
-    }
-
-    Player getLeadPlayer() {
-      return leadPlayer;
-    }
-
-
-    Long getPlayerScores(Player aPlayer) {
-      return playerScores.get(aPlayer);
-    }
-
-    public Long getLead() {
-      return lead;
-    }
-
-    void addPoint(GamePoint aPoint) {
-      adjustScoreBoard(aPoint.getScoringPlayer());
-    }
-
-    /**
-     * TODO
-     * Make it thread safe
-     *
-     * @param scoringPlayer
-     */
-    private void adjustScoreBoard(Player scoringPlayer) {
-      Long playerScore = playerScores.get(scoringPlayer);
-      playerScore++;
-      if (leadPlayer == null || playerScore > playerScores.get(leadPlayer)) {
-        leadPlayer = scoringPlayer;
-        lead++;
-      } else {
-        lead--;
-      }
-      playerScores.put(scoringPlayer, playerScore);
-    }
-
-    private void adjustLead(Player scoringPlayer) {
-      if (leadPlayer.equals(scoringPlayer))
-        lead++;
-      else
-        lead--;
-    }
   }
 
 }
