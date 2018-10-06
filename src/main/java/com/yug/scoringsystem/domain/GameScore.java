@@ -3,6 +3,7 @@ package com.yug.scoringsystem.domain;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -57,4 +58,7 @@ public class GameScore {
     playerScores.put(scoringPlayer, playerScore);
   }
 
+  public Set<Player> getParticipatingPlayers(){
+    return playerScores.keySet();
+  }
 }
