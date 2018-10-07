@@ -2,7 +2,7 @@ package com.yug.scoringsystem.converters;
 
 import com.yug.scoringsystem.domain.Player;
 import com.yug.scoringsystem.domain.ScoreBoard;
-import com.yug.scoringsystem.domain.game.TangibleStatus;
+import com.yug.scoringsystem.domain.TangibleStatus;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.yug.scoringsystem.domain.game.GameState.*;
+import static com.yug.scoringsystem.domain.game.states.GameState.*;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
@@ -41,7 +41,7 @@ public class GameTangibleStatusToStringConverterTest {
     when(aScoreBoard.getParticipatingPlayers()).thenReturn(participatingPlayers);
 
     //when
-    String message = ClockIGameStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
+    String message = NormalGameStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
 
     assertThat(message).contains("player 2 30").contains("player 1 30");
 
@@ -56,7 +56,7 @@ public class GameTangibleStatusToStringConverterTest {
     when(aScoreBoard.getParticipatingPlayers()).thenReturn(participatingPlayers);
 
     //when
-    String message = ClockIGameStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
+    String message = NormalGameStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
 
     //then
     assertThat(message).contains("Deuce").contains("player 2 40").contains("player 1 40");
@@ -70,7 +70,7 @@ public class GameTangibleStatusToStringConverterTest {
     when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player("player 1")));
 
     //when
-    String message = ClockIGameStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
+    String message = NormalGameStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
 
     assertThat(message).isEqualTo("Advantage to player 1");
 
@@ -83,7 +83,7 @@ public class GameTangibleStatusToStringConverterTest {
     when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player("player 1")));
 
     //when
-    String message = ClockIGameStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
+    String message = NormalGameStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
 
     assertThat(message).isEqualTo("Game won by player 1");
 

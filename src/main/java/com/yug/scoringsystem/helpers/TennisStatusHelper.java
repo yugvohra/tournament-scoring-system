@@ -1,11 +1,11 @@
 package com.yug.scoringsystem.helpers;
 
-import com.yug.scoringsystem.converters.ClockIGameStringConverter;
+import com.yug.scoringsystem.converters.NormalGameStringConverter;
 import com.yug.scoringsystem.converters.IGameStringConverter;
 import com.yug.scoringsystem.converters.SetMessageConverter;
-import com.yug.scoringsystem.converters.TieBreakerStringConverter;
+import com.yug.scoringsystem.converters.TieBreakerGameStringConverter;
 import com.yug.scoringsystem.domain.game.Game;
-import com.yug.scoringsystem.domain.game.TangibleStatus;
+import com.yug.scoringsystem.domain.TangibleStatus;
 import com.yug.scoringsystem.domain.set.TennisSet;
 
 import static com.yug.scoringsystem.domain.game.GameType.NORMAL;
@@ -22,7 +22,7 @@ class TennisStatusHelper {
   }
 
   static String getStatusMessageOfGame(Game game) {
-    IGameStringConverter messageConverter = game.getGameType() == NORMAL ? ClockIGameStringConverter.getInstance() : TieBreakerStringConverter.getInstance();
+    IGameStringConverter messageConverter = game.getGameType() == NORMAL ? NormalGameStringConverter.getInstance() : TieBreakerGameStringConverter.getInstance();
     return messageConverter.fetchStringMessageFrom(findStatusOfGame(game));
   }
 

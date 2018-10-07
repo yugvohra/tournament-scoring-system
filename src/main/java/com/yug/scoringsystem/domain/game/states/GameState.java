@@ -1,8 +1,9 @@
-package com.yug.scoringsystem.domain.game;
+package com.yug.scoringsystem.domain.game.states;
 
 import com.yug.scoringsystem.domain.IState;
 import com.yug.scoringsystem.domain.Player;
 import com.yug.scoringsystem.domain.ScoreBoard;
+import com.yug.scoringsystem.domain.game.GamePoint;
 
 import java.util.Optional;
 
@@ -10,7 +11,7 @@ public enum GameState implements IState<GamePoint> {
 
   UNDECIDED_TIEBREAKER {
     public boolean canTransition() {
-      return false;
+      return true;
     }
 
     public IState nextState(ScoreBoard<GamePoint> scoreboard) {
@@ -24,7 +25,7 @@ public enum GameState implements IState<GamePoint> {
   },
   UNDECIDED {
     public boolean canTransition() {
-      return false;
+      return true;
     }
 
     public IState nextState(ScoreBoard<GamePoint> scoreboard) {
@@ -41,7 +42,7 @@ public enum GameState implements IState<GamePoint> {
 
   ADVANTAGE {
     public boolean canTransition() {
-      return false;
+      return true;
     }
 
     public IState nextState(ScoreBoard<GamePoint> scoreboard) {
@@ -54,17 +55,9 @@ public enum GameState implements IState<GamePoint> {
         return ADVANTAGE;
     }
   },
-  WON {
+  DEUCE {
     public boolean canTransition() {
       return true;
-    }
-
-    public IState nextState(ScoreBoard<GamePoint> scoreboard) {
-      return WON;
-    }
-  }, DEUCE {
-    public boolean canTransition() {
-      return false;
     }
 
     public IState nextState(ScoreBoard<GamePoint> scoreboard) {
@@ -74,5 +67,14 @@ public enum GameState implements IState<GamePoint> {
       else
         return DEUCE;
     }
-  }
+  },
+  WON {
+    public boolean canTransition() {
+      return false;
+    }
+
+    public IState nextState(ScoreBoard<GamePoint> scoreboard) {
+      return WON;
+    }
+  },
 }

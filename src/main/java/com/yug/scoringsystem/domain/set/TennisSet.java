@@ -59,7 +59,7 @@ public class TennisSet {
   }
 
   public void addAPoint(SetPoint aPoint) {
-    if (this.state.canTransition())
+    if (!this.state.canTransition())
       return;
     getTennisIntegral().addAPoint(aPoint);
     this.state = state.nextState(getTennisIntegral().getScoreBoard());

@@ -2,7 +2,7 @@ package com.yug.scoringsystem.converters;
 
 import com.yug.scoringsystem.domain.Player;
 import com.yug.scoringsystem.domain.ScoreBoard;
-import com.yug.scoringsystem.domain.game.TangibleStatus;
+import com.yug.scoringsystem.domain.TangibleStatus;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

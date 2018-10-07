@@ -2,20 +2,19 @@ package com.yug.scoringsystem.converters;
 
 import com.yug.scoringsystem.domain.ScoreBoard;
 import com.yug.scoringsystem.domain.game.GamePoint;
-import com.yug.scoringsystem.domain.game.GameState;
-import com.yug.scoringsystem.domain.game.TangibleStatus;
+import com.yug.scoringsystem.domain.game.states.GameState;
+import com.yug.scoringsystem.domain.TangibleStatus;
 import com.yug.scoringsystem.helpers.ScoreMessageHelper;
 
 import java.util.StringJoiner;
 
-public class ClockIGameStringConverter implements IGameStringConverter {
-  private static ClockIGameStringConverter INSTANCE = new ClockIGameStringConverter();
+public class NormalGameStringConverter implements IGameStringConverter {
+  private static NormalGameStringConverter INSTANCE = new NormalGameStringConverter();
 
-  private ClockIGameStringConverter() {
-
+  private NormalGameStringConverter() {
   }
 
-  public static ClockIGameStringConverter getInstance() {
+  public static NormalGameStringConverter getInstance() {
     return INSTANCE;
   }
 

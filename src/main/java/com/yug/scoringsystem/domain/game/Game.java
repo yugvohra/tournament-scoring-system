@@ -9,8 +9,8 @@ import com.yug.scoringsystem.domain.TennisIntegral;
 import java.util.Set;
 import java.util.StringJoiner;
 
-import static com.yug.scoringsystem.domain.game.GameState.UNDECIDED;
-import static com.yug.scoringsystem.domain.game.GameState.UNDECIDED_TIEBREAKER;
+import static com.yug.scoringsystem.domain.game.states.GameState.UNDECIDED;
+import static com.yug.scoringsystem.domain.game.states.GameState.UNDECIDED_TIEBREAKER;
 
 public class Game {
   private final String gameId;
@@ -55,7 +55,7 @@ public class Game {
   }
 
   public void addAPoint(GamePoint aPoint) {
-    if (gameState.canTransition())
+    if (!gameState.canTransition())
       return;
     getTennisIntegral().addAPoint(aPoint);
     this.gameState = gameState.nextState(getTennisIntegral().getScoreBoard());

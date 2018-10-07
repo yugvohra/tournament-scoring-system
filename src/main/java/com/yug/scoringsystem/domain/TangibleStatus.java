@@ -1,7 +1,4 @@
-package com.yug.scoringsystem.domain.game;
-
-import com.yug.scoringsystem.domain.IState;
-import com.yug.scoringsystem.domain.ScoreBoard;
+package com.yug.scoringsystem.domain;
 
 public class TangibleStatus {
   private final IState state;

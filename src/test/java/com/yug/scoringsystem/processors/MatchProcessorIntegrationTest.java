@@ -6,7 +6,7 @@ import com.yug.scoringsystem.domain.set.SetPoint;
 import com.yug.scoringsystem.helpers.MatchStatusConsoleLogger;
 import org.junit.Test;
 
-import static com.yug.scoringsystem.domain.game.GameState.DEUCE;
+import static com.yug.scoringsystem.domain.game.states.GameState.DEUCE;
 import static com.yug.scoringsystem.domain.set.states.SetState.UNDECIDED;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 

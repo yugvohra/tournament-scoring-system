@@ -2,19 +2,19 @@ package com.yug.scoringsystem.converters;
 
 import com.yug.scoringsystem.domain.ScoreBoard;
 import com.yug.scoringsystem.domain.game.GamePoint;
-import com.yug.scoringsystem.domain.game.GameState;
-import com.yug.scoringsystem.domain.game.TangibleStatus;
+import com.yug.scoringsystem.domain.game.states.GameState;
+import com.yug.scoringsystem.domain.TangibleStatus;
 
 import java.util.StringJoiner;
 
-public class TieBreakerStringConverter implements IGameStringConverter {
-  private static TieBreakerStringConverter INSTANCE = new TieBreakerStringConverter();
+public class TieBreakerGameStringConverter implements IGameStringConverter {
+  private static TieBreakerGameStringConverter INSTANCE = new TieBreakerGameStringConverter();
 
-  private TieBreakerStringConverter() {
+  private TieBreakerGameStringConverter() {
 
   }
 
-  public static TieBreakerStringConverter getInstance() {
+  public static TieBreakerGameStringConverter getInstance() {
     return INSTANCE;
   }
 

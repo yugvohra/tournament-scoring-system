@@ -2,7 +2,7 @@ package com.yug.scoringsystem.converters;
 
 import com.yug.scoringsystem.domain.Player;
 import com.yug.scoringsystem.domain.ScoreBoard;
-import com.yug.scoringsystem.domain.game.TangibleStatus;
+import com.yug.scoringsystem.domain.TangibleStatus;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,14 +14,14 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.yug.scoringsystem.domain.game.GameState.UNDECIDED_TIEBREAKER;
-import static com.yug.scoringsystem.domain.game.GameState.WON;
+import static com.yug.scoringsystem.domain.game.states.GameState.UNDECIDED_TIEBREAKER;
+import static com.yug.scoringsystem.domain.game.states.GameState.WON;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TieBreakerStringConverterTest {
+public class TieBreakerGameStringConverterTest {
   @Mock
   private ScoreBoard aScoreBoard;
   @Mock
@@ -41,7 +41,7 @@ public class TieBreakerStringConverterTest {
     when(aScoreBoard.getParticipatingPlayers()).thenReturn(participatingPlayers);
 
     //when
-    String message = TieBreakerStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
+    String message = TieBreakerGameStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
 
     assertThat(message).contains("player 2 2").contains("player 1 2");
 
@@ -54,7 +54,7 @@ public class TieBreakerStringConverterTest {
     when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player("player 1")));
 
     //when
-    String message = TieBreakerStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
+    String message = TieBreakerGameStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
 
     assertThat(message).isEqualTo("game won by player 1");
 

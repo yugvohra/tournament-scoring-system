@@ -2,7 +2,7 @@ package com.yug.scoringsystem.converters;
 
 import com.yug.scoringsystem.domain.ScoreBoard;
 import com.yug.scoringsystem.domain.game.GamePoint;
-import com.yug.scoringsystem.domain.game.TangibleStatus;
+import com.yug.scoringsystem.domain.TangibleStatus;
 import com.yug.scoringsystem.domain.set.states.SetState;
 
 import java.util.StringJoiner;

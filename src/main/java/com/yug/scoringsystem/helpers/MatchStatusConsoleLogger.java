@@ -1,7 +1,7 @@
 package com.yug.scoringsystem.helpers;
 
 import com.yug.scoringsystem.domain.Match;
-import com.yug.scoringsystem.domain.game.TangibleStatus;
+import com.yug.scoringsystem.domain.TangibleStatus;
 import com.yug.scoringsystem.domain.set.TennisSet;
 
 import static com.yug.scoringsystem.domain.set.states.SetState.WON;

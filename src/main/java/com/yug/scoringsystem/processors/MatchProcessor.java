@@ -4,7 +4,7 @@ import com.yug.scoringsystem.domain.Match;
 import com.yug.scoringsystem.domain.Player;
 import com.yug.scoringsystem.domain.game.Game;
 import com.yug.scoringsystem.domain.game.GamePoint;
-import com.yug.scoringsystem.domain.game.GameState;
+import com.yug.scoringsystem.domain.game.states.GameState;
 import com.yug.scoringsystem.domain.set.SetPoint;
 import com.yug.scoringsystem.domain.set.TennisSet;
 import com.yug.scoringsystem.helpers.IMatchStatusLogger;
