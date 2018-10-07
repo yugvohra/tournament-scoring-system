@@ -14,7 +14,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.yug.scoringsystem.domain.game.GameState.*;
+import static com.yug.scoringsystem.domain.game.GameState.UNDECIDED_TIEBREAKER;
+import static com.yug.scoringsystem.domain.game.GameState.WON;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
@@ -40,7 +41,7 @@ public class TieBreakerStringConverterTest {
     when(aScoreBoard.getParticipatingPlayers()).thenReturn(participatingPlayers);
 
     //when
-    String message = ClockIGameStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
+    String message = TieBreakerStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
 
     assertThat(message).contains("player 2 2").contains("player 1 2");
 
@@ -53,9 +54,9 @@ public class TieBreakerStringConverterTest {
     when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player("player 1")));
 
     //when
-    String message = ClockIGameStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
+    String message = TieBreakerStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
 
-    assertThat(message).isEqualTo("Game won by player 1");
+    assertThat(message).isEqualTo("game won by player 1");
 
   }
 

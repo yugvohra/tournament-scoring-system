@@ -3,6 +3,12 @@ package com.yug.scoringsystem.domain;
 import java.util.Objects;
 
 public class Player {
+  private final String Name;
+
+  public Player(String name) {
+    Name = name;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -14,12 +20,6 @@ public class Player {
   @Override
   public int hashCode() {
     return Objects.hash(Name);
-  }
-
-  private final String Name;
-
-  public Player(String name) {
-    Name = name;
   }
 
   public String getName() {

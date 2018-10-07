@@ -58,8 +58,8 @@ public class GameTangibleStatusToStringConverterTest {
     //when
     String message = ClockIGameStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
 
+    //then
     assertThat(message).contains("Deuce").contains("player 2 40").contains("player 1 40");
-    ;
 
   }
 

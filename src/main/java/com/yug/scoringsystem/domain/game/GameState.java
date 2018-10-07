@@ -10,7 +10,7 @@ public enum GameState implements IState<GamePoint> {
 
   UNDECIDED_TIEBREAKER {
     public boolean canTransition() {
-      return true;
+      return false;
     }
 
     public IState nextState(ScoreBoard<GamePoint> scoreboard) {
@@ -24,7 +24,7 @@ public enum GameState implements IState<GamePoint> {
   },
   UNDECIDED {
     public boolean canTransition() {
-      return true;
+      return false;
     }
 
     public IState nextState(ScoreBoard<GamePoint> scoreboard) {
@@ -32,7 +32,7 @@ public enum GameState implements IState<GamePoint> {
       Long lead = scoreboard.getLead();
       if (lead >= 2 && scoreboard.getPlayerScore(leadingPlayer.get()) > 3)
         return WON;
-      else if (leadingPlayer.isPresent() && lead == 0 && scoreboard.getPlayerScore(leadingPlayer.get()) > 3)
+      else if (leadingPlayer.isPresent() && lead == 0 && scoreboard.getPlayerScore(leadingPlayer.get()) >= 3)
         return DEUCE;
       else
         return UNDECIDED;
@@ -41,7 +41,7 @@ public enum GameState implements IState<GamePoint> {
 
   ADVANTAGE {
     public boolean canTransition() {
-      return true;
+      return false;
     }
 
     public IState nextState(ScoreBoard<GamePoint> scoreboard) {
@@ -56,7 +56,7 @@ public enum GameState implements IState<GamePoint> {
   },
   WON {
     public boolean canTransition() {
-      return false;
+      return true;
     }
 
     public IState nextState(ScoreBoard<GamePoint> scoreboard) {
@@ -64,7 +64,7 @@ public enum GameState implements IState<GamePoint> {
     }
   }, DEUCE {
     public boolean canTransition() {
-      return true;
+      return false;
     }
 
     public IState nextState(ScoreBoard<GamePoint> scoreboard) {

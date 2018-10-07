@@ -10,24 +10,23 @@ import com.yug.scoringsystem.domain.set.TennisSet;
 
 import static com.yug.scoringsystem.domain.game.GameType.NORMAL;
 
-public class TennisStatusHelper {
+class TennisStatusHelper {
 
-  public static TangibleStatus findStatusOfSet(TennisSet set) {
-    return new TangibleStatus(set.getState(),set.getScoreBoard());
+  static TangibleStatus findStatusOfSet(TennisSet set) {
+    return new TangibleStatus(set.getState(), set.getScoreBoard());
 
   }
 
-  public static TangibleStatus findStatusOfGame(Game game) {
-    return new TangibleStatus(game.getState(),game.getScoreBoard());
+  private static TangibleStatus findStatusOfGame(Game game) {
+    return new TangibleStatus(game.getState(), game.getScoreBoard());
   }
 
-  public static String getStatusMessageOfGame(Game game)
-  {
-    IGameStringConverter messageConverter=game.getGameType()== NORMAL? ClockIGameStringConverter.getInstance(): TieBreakerStringConverter.getInstance();
+  static String getStatusMessageOfGame(Game game) {
+    IGameStringConverter messageConverter = game.getGameType() == NORMAL ? ClockIGameStringConverter.getInstance() : TieBreakerStringConverter.getInstance();
     return messageConverter.fetchStringMessageFrom(findStatusOfGame(game));
   }
-  public static String getStatusMessageOfSet(TennisSet aSet)
-  {
+
+  static String getStatusMessageOfSet(TennisSet aSet) {
     return SetMessageConverter.getInstance().fetchStringMessageFrom(findStatusOfSet(aSet));
   }
 

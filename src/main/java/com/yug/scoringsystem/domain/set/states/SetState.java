@@ -10,7 +10,7 @@ import java.util.Optional;
 public enum SetState implements IState<SetPoint> {
   UNDECIDED() {
     public boolean canTransition() {
-      return true;
+      return false;
     }
 
     public IState nextState(ScoreBoard<SetPoint> scoreboard) {
@@ -28,7 +28,7 @@ public enum SetState implements IState<SetPoint> {
 
   TIE {
     public boolean canTransition() {
-      return true;
+      return false;
     }
 
     public IState nextState(ScoreBoard<SetPoint> scoreboard) {
@@ -41,7 +41,7 @@ public enum SetState implements IState<SetPoint> {
 
   WON {
     public boolean canTransition() {
-      return false;
+      return true;
     }
 
     public IState nextState(ScoreBoard<SetPoint> scoreboard) {

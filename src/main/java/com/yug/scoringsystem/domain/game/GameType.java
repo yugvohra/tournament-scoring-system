@@ -1,5 +1,5 @@
 package com.yug.scoringsystem.domain.game;
 
 public enum GameType {
-  NORMAL,TIE_BREAKER
+  NORMAL, TIE_BREAKER
 }

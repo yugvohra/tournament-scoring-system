@@ -31,6 +31,7 @@ public class Game {
     this.gameId = stringJoiner.toString();
     this.gameType = gameType;
     tennisIntegral = new TennisIntegral<>(participatingPlayers);
+    gameState = gameType == GameType.NORMAL ? UNDECIDED : UNDECIDED_TIEBREAKER;
   }
 
   public Game(Player playerOne, Player playerTwo, GameType gameType) {
@@ -41,20 +42,20 @@ public class Game {
     return gameType;
   }
 
-  public TennisIntegral<GamePoint> getTennisIntegral() {
+  private TennisIntegral<GamePoint> getTennisIntegral() {
     return tennisIntegral;
   }
 
-  public String getGameId() {
+  String getGameId() {
     return gameId;
   }
 
-  public Set<GamePoint> getPoints() {
+  Set<GamePoint> getPoints() {
     return getTennisIntegral().getPoints();
   }
 
   public void addAPoint(GamePoint aPoint) {
-    if (!gameState.canTransition())
+    if (gameState.canTransition())
       return;
     getTennisIntegral().addAPoint(aPoint);
     this.gameState = gameState.nextState(getTennisIntegral().getScoreBoard());

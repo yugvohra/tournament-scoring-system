@@ -1,5 +1,8 @@
-package com.yug.scoringsystem.domain;
+package com.yug.scoringsystem.domain.game;
 
+import com.yug.scoringsystem.domain.Player;
+import com.yug.scoringsystem.domain.ScoreBoard;
+import com.yug.scoringsystem.domain.TennisIntegral;
 import com.yug.scoringsystem.domain.game.Game;
 import com.yug.scoringsystem.domain.game.GamePoint;
 import com.yug.scoringsystem.domain.game.GameState;
@@ -37,6 +40,7 @@ public class GameTest {
   public void shouldReturnUndecidedStateForOngoingGame() {
     when(aScoreBoard.getPlayerScore(any())).thenReturn(3L);
     when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player("player one")));
+    when(aScoreBoard.getLead()).thenReturn(3L);
     //given
     subject.addAPoint(new GamePoint(new Player("player one")));
     //when
@@ -58,7 +62,7 @@ public class GameTest {
   public void shouldReturnDeuceForEqualScores() {
     //given
     when(aScoreBoard.getLead()).thenReturn(0L);
-    when(aScoreBoard.getPlayerScore(any())).thenReturn(5L);
+    when(aScoreBoard.getPlayerScore(any())).thenReturn(4L);
 
     when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player("player one")));
     //when

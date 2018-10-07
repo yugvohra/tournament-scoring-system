@@ -1,6 +1,5 @@
 package com.yug.scoringsystem.domain;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -47,8 +46,6 @@ public class ScoreBoard<T extends IScoredPoint> {
   /**
    * TODO
    * Make it thread safe
-   *
-   *
    */
   private void adjustScoreBoard(Player scoringPlayer) {
     Long playerScore = playerScores.get(scoringPlayer);

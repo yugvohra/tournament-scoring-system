@@ -62,34 +62,4 @@ public class MatchProcessor {
   public void showScore() {
     logger.logMatchStatus(match);
   }
-/*
-  private TangibleStatus getStatusAfterScoredPoint(Game onGoingGame, GamePoint gamePoint) {
-    onGoingGame.addAPoint(gamePoint);
-    return findOutComeOfScoredPoint(onGoingGame);
-  }*/
-/*
-
-  private void setNextState(TennisSet tennisSet) {
-    */
-
-  /**
-   * will find the current status of the set WON , in TIE or UNDECIDED
-   *//*
-
-    TangibleStatus setStatus = TennisStatusHelper.findStatusOfSet(tennisSet);
-    switch (setStatus.getState()) {
-      case WON:
-        break;
-      case UNDECIDED:
-        tennisSet.setCurrentGame(new Game(playerOne, playerTwo, GameType.NORMAL));
-        break;
-      case TIE:
-        tennisSet.setCurrentGame(new Game(playerOne, playerTwo, GameType.TIE_BREAKER));
-        break;
-    }
-  }
-*/
- /* private TangibleStatus findOutComeOfScoredPoint(Game onGoingGame) {
-    return TennisStatusHelper.findStatusOfGame(onGoingGame);
-  }*/
 }

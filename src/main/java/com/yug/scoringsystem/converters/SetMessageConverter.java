@@ -22,7 +22,7 @@ public class SetMessageConverter {
   public String fetchStringMessageFrom(TangibleStatus aTangibleStatus) {
     ScoreBoard<GamePoint> scoreBoard = aTangibleStatus.getScoreBoard();
     StringJoiner stringJoiner = new StringJoiner(",");
-    switch ((SetState)aTangibleStatus.getState()) {
+    switch ((SetState) aTangibleStatus.getState()) {
       case UNDECIDED:
         stringJoiner.add("Set state is");
         scoreBoard.getParticipatingPlayers().forEach(player -> stringJoiner.add(player.getName() + " " + scoreBoard.getPlayerScore(player)));
