@@ -139,7 +139,7 @@ public class TennisSetTest {
     subject.addAPoint(new SetPoint(game, new Player("player one")));
     //then
     assertThat(subject.getSetState()).isEqualTo(SetState.WON);
-    verify(subject,times(0)).getScoreBoard();
+    verify(tennisIntegral,times(0)).getScoreBoard();
   }
 
 

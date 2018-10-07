@@ -100,7 +100,20 @@ public class GameTest {
   }
 
   @Test
-  public void shouldReturnWonWhenGameEnds() {
+  public void shouldReturnDWonWhenAdvantagePlayerScores() {
+    //given
+    //stats is advantage
+    Whitebox.setInternalState(subject, "gameState", GameState.ADVANTAGE);
+    when(aScoreBoard.getLead()).thenReturn(2L);
+    when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player("player one")));
+    //when
+    subject.addAPoint(new GamePoint(new Player("player one")));
+    //then
+    assertThat(subject.getState()).isEqualTo(GameState.WON);
+  }
+
+  @Test
+  public void ShouldNotChangeStateWhenGameEnds() {
     //given
     Whitebox.setInternalState(subject, "gameState", GameState.WON);
     //when
@@ -112,7 +125,7 @@ public class GameTest {
 
 
   @Test
-  public void ShouldNotChangeStateWhenGameEnds() {
+  public void shouldReturnWonWhenGameEnds() {
     //given
     when(aScoreBoard.getLead()).thenReturn(2L);
     when(aScoreBoard.getPlayerScore(any())).thenReturn(5L);
