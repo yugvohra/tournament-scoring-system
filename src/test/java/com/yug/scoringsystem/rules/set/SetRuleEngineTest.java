@@ -46,11 +46,54 @@ public class SetRuleEngineTest {
     SetRuleEngine setRuleEngine = SetRuleEngine.getInstance();
     when(aScoreBoard.getLead()).thenReturn(3L);
     when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player(" player 1")));
-    when(aScoreBoard.getPlayerScore(any())).thenReturn(6L);
+    when(aScoreBoard.getPlayerScore(any())).thenReturn(5L);
 
     //when
     TangibleStatus fetchedStatus = setRuleEngine.determineSetState(aSet);
     assertThat(fetchedStatus.getState()).isEqualTo(State.UNDECIDED);
+
+  }
+
+  @Test
+  public void shouldReturnWonForStraightWin() {
+    //given
+    SetRuleEngine setRuleEngine = SetRuleEngine.getInstance();
+    when(aScoreBoard.getLead()).thenReturn(3L);
+    when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player(" player 1")));
+    when(aScoreBoard.getPlayerScore(any())).thenReturn(6L);
+
+    //when
+    TangibleStatus fetchedStatus = setRuleEngine.determineSetState(aSet);
+    assertThat(fetchedStatus.getState()).isEqualTo(State.WON);
+
+  }
+
+  @Test
+  public void shouldtReturnWinnForTrailingGame() {
+    //given
+    SetRuleEngine setRuleEngine = SetRuleEngine.getInstance();
+    when(aScoreBoard.getLead()).thenReturn(2L);
+    when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player(" player 1")));
+    when(aScoreBoard.getPlayerScore(any())).thenReturn(7L);
+
+    //when
+    TangibleStatus fetchedStatus = setRuleEngine.determineSetState(aSet);
+    assertThat(fetchedStatus.getState()).isEqualTo(State.WON);
+
+  }
+
+
+  @Test
+  public void shouldReturnTieStatus() {
+    //given
+    SetRuleEngine setRuleEngine = SetRuleEngine.getInstance();
+    when(aScoreBoard.getLead()).thenReturn(0L);
+    when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player(" player 1")));
+    when(aScoreBoard.getPlayerScore(any())).thenReturn(6L);
+
+    //when
+    TangibleStatus fetchedStatus = setRuleEngine.determineSetState(aSet);
+    assertThat(fetchedStatus.getState()).isEqualTo(State.TIE);
 
   }
 
@@ -69,12 +112,12 @@ public class SetRuleEngineTest {
   }
 
   @Test
-  public void shouldReturWonStateWhenGameEnds() {
+  public void shouldReturWonStateWhenTrailingGameEnds() {
     //given
     SetRuleEngine setRuleEngine = SetRuleEngine.getInstance();
-    when(aScoreBoard.getLead()).thenReturn(2L);
+    when(aScoreBoard.getLead()).thenReturn(1L);
     when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player(" player 1")));
-    when(aScoreBoard.getPlayerScore(any())).thenReturn(8L);
+    when(aScoreBoard.getPlayerScore(any())).thenReturn(7L);
 
     //when
     TangibleStatus fetchedStatus = setRuleEngine.determineSetState(aSet);

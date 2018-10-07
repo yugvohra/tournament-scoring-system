@@ -20,7 +20,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TangibleStatusToStringMessageConverterTest {
+public class GameTangibleStatusToStringConverterTest {
 
   @Mock
   private ScoreBoard aScoreBoard;
@@ -41,7 +41,7 @@ public class TangibleStatusToStringMessageConverterTest {
     when(aScoreBoard.getParticipatingPlayers()).thenReturn(participatingPlayers);
 
     //when
-    String message = GameStatusToStringMessageConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
+    String message = ClockGameStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
 
     assertThat(message).contains("player 2 30").contains("player 1 30");
 
@@ -56,7 +56,7 @@ public class TangibleStatusToStringMessageConverterTest {
     when(aScoreBoard.getParticipatingPlayers()).thenReturn(participatingPlayers);
 
     //when
-    String message = GameStatusToStringMessageConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
+    String message = ClockGameStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
 
     assertThat(message).contains("Deuce").contains("player 2 40").contains("player 1 40");
     ;
@@ -70,7 +70,7 @@ public class TangibleStatusToStringMessageConverterTest {
     when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player("player 1")));
 
     //when
-    String message = GameStatusToStringMessageConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
+    String message = ClockGameStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
 
     assertThat(message).isEqualTo("Advantage to player 1");
 
@@ -83,7 +83,7 @@ public class TangibleStatusToStringMessageConverterTest {
     when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player("player 1")));
 
     //when
-    String message = GameStatusToStringMessageConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
+    String message = ClockGameStringConverter.getInstance().fetchStringMessageFrom(aTangibleStatus);
 
     assertThat(message).isEqualTo("Game won by player 1");
 

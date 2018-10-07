@@ -1,7 +1,5 @@
 package com.yug.scoringsystem.domain;
 
-import com.yug.scoringsystem.domain.game.GamePoint;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -25,7 +23,7 @@ public class ScoreBoard<T extends IScoredPoint> {
     playerScores = participatingPlayers.parallelStream().collect(Collectors.toMap(player -> player, player -> 0L));
   }
 
- public Optional<Player> getLeadPlayer() {
+  public Optional<Player> getLeadPlayer() {
     return Optional.ofNullable(leadPlayer);
   }
 
@@ -38,11 +36,11 @@ public class ScoreBoard<T extends IScoredPoint> {
     return lead;
   }
 
-  public Set<Player> getParticipatingPlayers(){
+  public Set<Player> getParticipatingPlayers() {
     return playerScores.keySet();
   }
 
-  public void addPoint(T aPoint) {
+  void addPoint(T aPoint) {
     adjustScoreBoard(aPoint.getScoringPlayer());
   }
 
@@ -50,7 +48,7 @@ public class ScoreBoard<T extends IScoredPoint> {
    * TODO
    * Make it thread safe
    *
-   * @param scoringPlayer
+   *
    */
   private void adjustScoreBoard(Player scoringPlayer) {
     Long playerScore = playerScores.get(scoringPlayer);

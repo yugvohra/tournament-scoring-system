@@ -7,14 +7,14 @@ import com.yug.scoringsystem.helpers.ScoreMessageHelper;
 
 import java.util.StringJoiner;
 
-public class GameStatusToStringMessageConverter {
-  private static GameStatusToStringMessageConverter INSTANCE = new GameStatusToStringMessageConverter();
+public class ClockGameStringConverter implements ITangibleStatusToMessageConverter {
+  private static ClockGameStringConverter INSTANCE = new ClockGameStringConverter();
 
-  private GameStatusToStringMessageConverter() {
+  private ClockGameStringConverter() {
 
   }
 
-  public static GameStatusToStringMessageConverter getInstance() {
+  public static ClockGameStringConverter getInstance() {
     return INSTANCE;
   }
 
@@ -27,7 +27,7 @@ public class GameStatusToStringMessageConverter {
         scoreBoard.getParticipatingPlayers().forEach(player -> stringJoiner.add(player.getName() + " " + ScoreMessageHelper.getClockScoreForPoints(scoreBoard.getPlayerScore(player))));
         return stringJoiner.toString();
       case DEUCE:
-        stringJoiner.add("Deuce");
+        stringJoiner.add("Game is in Deuce");
         scoreBoard.getParticipatingPlayers().forEach(player -> stringJoiner.add(player.getName() + " " + ScoreMessageHelper.getClockScoreForPoints(scoreBoard.getPlayerScore(player))));
         return stringJoiner.toString();
       case ADVANTAGE:
