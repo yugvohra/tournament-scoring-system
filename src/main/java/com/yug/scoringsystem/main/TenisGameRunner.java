@@ -4,7 +4,8 @@ import com.yug.scoringsystem.helpers.MatchStatusConsoleLogger;
 import com.yug.scoringsystem.helpers.TennisStatusHelper;
 import com.yug.scoringsystem.processors.MatchProcessor;
 
-import static com.yug.scoringsystem.domain.game.State.WON;
+import static com.yug.scoringsystem.domain.set.states.SetState.WON;
+
 
 public class TenisGameRunner {
   public static void main(String args[]) {
@@ -17,6 +18,6 @@ public class TenisGameRunner {
       matchProcessor.pointWonBy(playersNames[playerIdx]);
       matchProcessor.showScore();
 
-    } while (TennisStatusHelper.findStatusOfSet(matchProcessor.getMatch().getTennisSet()).getState() != WON);
+    } while (matchProcessor.getMatch().getTennisSet().getState()!=WON);
   }
 }

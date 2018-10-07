@@ -4,18 +4,14 @@ import com.yug.scoringsystem.domain.Match;
 import com.yug.scoringsystem.domain.Player;
 import com.yug.scoringsystem.domain.game.Game;
 import com.yug.scoringsystem.domain.game.GamePoint;
-import com.yug.scoringsystem.domain.game.GameType;
-import com.yug.scoringsystem.domain.game.TangibleStatus;
+import com.yug.scoringsystem.domain.game.GameState;
 import com.yug.scoringsystem.domain.set.SetPoint;
 import com.yug.scoringsystem.domain.set.TennisSet;
 import com.yug.scoringsystem.helpers.IMatchStatusLogger;
 import com.yug.scoringsystem.helpers.MatchStatusConsoleLogger;
-import com.yug.scoringsystem.helpers.TennisStatusHelper;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.yug.scoringsystem.domain.game.State.WON;
 
 public class MatchProcessor {
 
@@ -51,11 +47,11 @@ public class MatchProcessor {
     //get current game
     Game onGoingGame = match.getTennisSet().getCurrentGame();
     //fetch status of game after the scored point
-    TangibleStatus gameStatus = getStatusAfterScoredPoint(onGoingGame, new GamePoint(scoringPlayer));
+    onGoingGame.addAPoint(new GamePoint(scoringPlayer));
 
-    if (gameStatus.getState() == WON) {
+    if (onGoingGame.getState() == GameState.WON) {
       match.getTennisSet().addAPoint(new SetPoint(onGoingGame, scoringPlayer));
-      setNextState(match.getTennisSet());
+      match.getTennisSet().addANewGaMe();
     }
     //else keep on playing the same game
   }
@@ -66,16 +62,20 @@ public class MatchProcessor {
   public void showScore() {
     logger.logMatchStatus(match);
   }
-
+/*
   private TangibleStatus getStatusAfterScoredPoint(Game onGoingGame, GamePoint gamePoint) {
     onGoingGame.addAPoint(gamePoint);
     return findOutComeOfScoredPoint(onGoingGame);
-  }
+  }*/
+/*
 
   private void setNextState(TennisSet tennisSet) {
-    /**
-     * will find the current status of the set WON , in TIE or UNDECIDED
-     */
+    */
+
+  /**
+   * will find the current status of the set WON , in TIE or UNDECIDED
+   *//*
+
     TangibleStatus setStatus = TennisStatusHelper.findStatusOfSet(tennisSet);
     switch (setStatus.getState()) {
       case WON:
@@ -88,8 +88,8 @@ public class MatchProcessor {
         break;
     }
   }
-
-  private TangibleStatus findOutComeOfScoredPoint(Game onGoingGame) {
+*/
+ /* private TangibleStatus findOutComeOfScoredPoint(Game onGoingGame) {
     return TennisStatusHelper.findStatusOfGame(onGoingGame);
-  }
+  }*/
 }

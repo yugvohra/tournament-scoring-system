@@ -2,26 +2,27 @@ package com.yug.scoringsystem.converters;
 
 import com.yug.scoringsystem.domain.ScoreBoard;
 import com.yug.scoringsystem.domain.game.GamePoint;
+import com.yug.scoringsystem.domain.game.GameState;
 import com.yug.scoringsystem.domain.game.TangibleStatus;
 import com.yug.scoringsystem.helpers.ScoreMessageHelper;
 
 import java.util.StringJoiner;
 
-public class ClockGameStringConverter implements ITangibleStatusToMessageConverter {
-  private static ClockGameStringConverter INSTANCE = new ClockGameStringConverter();
+public class ClockIGameStringConverter implements IGameStringConverter {
+  private static ClockIGameStringConverter INSTANCE = new ClockIGameStringConverter();
 
-  private ClockGameStringConverter() {
+  private ClockIGameStringConverter() {
 
   }
 
-  public static ClockGameStringConverter getInstance() {
+  public static ClockIGameStringConverter getInstance() {
     return INSTANCE;
   }
 
   public String fetchStringMessageFrom(TangibleStatus aTangibleStatus) {
     ScoreBoard<GamePoint> scoreBoard = aTangibleStatus.getScoreBoard();
     StringJoiner stringJoiner = new StringJoiner(",");
-    switch (aTangibleStatus.getState()) {
+    switch ((GameState) aTangibleStatus.getState()) {
       case UNDECIDED:
         stringJoiner.add("Game is ongoing");
         scoreBoard.getParticipatingPlayers().forEach(player -> stringJoiner.add(player.getName() + " " + ScoreMessageHelper.getClockScoreForPoints(scoreBoard.getPlayerScore(player))));

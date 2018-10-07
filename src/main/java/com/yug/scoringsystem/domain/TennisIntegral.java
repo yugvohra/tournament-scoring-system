@@ -1,8 +1,6 @@
 package com.yug.scoringsystem.domain;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class TennisIntegral<T extends IScoredPoint> {
@@ -14,11 +12,15 @@ public class TennisIntegral<T extends IScoredPoint> {
     initialize(playerOne, playerTwo);
   }
 
+  public TennisIntegral(Set<Player> players) {
+    assembleIntegrals(players);
+  }
+
   public Set<T> getPoints() {
     return points;
   }
 
-  public ScoreBoard<T> getScoreBoard() {
+  public ScoreBoard getScoreBoard() {
     return scoreBoard;
   }
 
@@ -28,10 +30,15 @@ public class TennisIntegral<T extends IScoredPoint> {
   }
 
   private void initialize(Player playerOne, Player playerTwo) {
-    points = new HashSet<>(16);
-    List<Player> participatingPlayers = new ArrayList<>();
+    Set<Player> participatingPlayers = new HashSet<>();
     participatingPlayers.add(playerOne);
     participatingPlayers.add(playerTwo);
-    scoreBoard = new ScoreBoard<T>(participatingPlayers);
+    assembleIntegrals(participatingPlayers);
+  }
+
+  private void assembleIntegrals(Set<Player> participatingPlayers) {
+    scoreBoard = new ScoreBoard<>(participatingPlayers);
+    points = new HashSet<>(16);
+
   }
 }

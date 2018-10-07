@@ -2,7 +2,6 @@ package com.yug.scoringsystem.rules.game;
 
 import com.yug.scoringsystem.domain.Player;
 import com.yug.scoringsystem.domain.game.Game;
-import com.yug.scoringsystem.domain.game.State;
 import com.yug.scoringsystem.domain.game.TangibleStatus;
 
 import java.util.Optional;

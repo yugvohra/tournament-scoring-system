@@ -6,6 +6,7 @@ import com.yug.scoringsystem.domain.set.SetPoint;
 import com.yug.scoringsystem.helpers.MatchStatusConsoleLogger;
 import org.junit.Test;
 
+import static com.yug.scoringsystem.domain.set.states.SetState.UNDECIDED;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class MatchProcessorIntegrationTest {
@@ -28,6 +29,7 @@ public class MatchProcessorIntegrationTest {
     ScoreBoard<GamePoint> gameScoreBoard=matchProcessor.getMatch ().getTennisSet().getCurrentGame().getScoreBoard();
 
     assertThat(setScoreBoard.getPlayerScore(setScoreBoard.getLeadPlayer().get())).isEqualTo(1L);
+    assertThat(matchProcessor.getMatch().getTennisSet().getState()).isEqualTo(UNDECIDED);
     assertThat(gameScoreBoard.getPlayerScore(gameScoreBoard.getLeadPlayer().get())).isEqualTo(1L);
   }
 

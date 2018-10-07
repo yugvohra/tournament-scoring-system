@@ -4,7 +4,7 @@ import com.yug.scoringsystem.domain.Match;
 import com.yug.scoringsystem.domain.game.TangibleStatus;
 import com.yug.scoringsystem.domain.set.TennisSet;
 
-import static com.yug.scoringsystem.domain.game.State.WON;
+import static com.yug.scoringsystem.domain.set.states.SetState.WON;
 
 public class MatchStatusConsoleLogger implements IMatchStatusLogger {
 

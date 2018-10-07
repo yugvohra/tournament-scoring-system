@@ -1,36 +1,50 @@
 package com.yug.scoringsystem.domain.set;
 
+import com.yug.scoringsystem.domain.IState;
 import com.yug.scoringsystem.domain.Player;
 import com.yug.scoringsystem.domain.ScoreBoard;
 import com.yug.scoringsystem.domain.TennisIntegral;
 import com.yug.scoringsystem.domain.game.Game;
 import com.yug.scoringsystem.domain.game.GameType;
+import com.yug.scoringsystem.domain.set.states.SetState;
 
 import java.util.Set;
+
+import static com.yug.scoringsystem.domain.set.states.SetState.UNDECIDED;
 
 public class TennisSet {
   private final String setId;
   private TennisIntegral<SetPoint> tennisIntegral;
   private Game currentGame;
+  private IState<SetPoint> state;
 
   public TennisSet(String setId, Player playerOne, Player playerTwo) {
     this.setId = setId;
     /**First game should be of type normal*/
     currentGame = new Game(playerOne, playerTwo, GameType.NORMAL);
     tennisIntegral = new TennisIntegral<>(playerOne, playerTwo);
+    state = UNDECIDED;
   }
 
   public TennisSet(Player playerOne, Player playerTwo) {
     this(String.format("%s VS %s", playerOne.getName(), playerTwo.getName()), playerOne, playerTwo);
   }
 
+  public IState<SetPoint> getState() {
+    return state;
+  }
+
   public Game getCurrentGame() {
     return currentGame;
   }
 
-  public void setCurrentGame(Game currentGame) {
-    this.currentGame = currentGame;
+  public void addANewGaMe() {
+    if (this.state == SetState.UNDECIDED)
+      currentGame = new Game(getTennisIntegral().getScoreBoard().getParticipatingPlayers(), GameType.NORMAL);
+    else if (this.state == SetState.TIE)
+      currentGame = new Game(getTennisIntegral().getScoreBoard().getParticipatingPlayers(), GameType.TIE_BREAKER);
   }
+
 
   public String getSetId() {
     return setId;
@@ -45,7 +59,10 @@ public class TennisSet {
   }
 
   public void addAPoint(SetPoint aPoint) {
+    if (!this.state.canTransition())
+      return;
     getTennisIntegral().addAPoint(aPoint);
+    this.state = state.nextState(getTennisIntegral().getScoreBoard());
   }
 
   public ScoreBoard getScoreBoard() {

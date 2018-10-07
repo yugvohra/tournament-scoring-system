@@ -5,14 +5,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class ScoreBoardTest {
 
 
-  private List<Player> participatingPlayers;
+  private Set<Player> participatingPlayers;
   private Player firstPlayer;
   private Player secondPlayer;
 
@@ -20,7 +21,7 @@ public class ScoreBoardTest {
   public void setUp() {
     firstPlayer = new Player("player one");
     secondPlayer = new Player("player Two");
-    participatingPlayers = Arrays.asList(firstPlayer, secondPlayer);
+    participatingPlayers = new HashSet(Arrays.asList(firstPlayer, secondPlayer));
   }
 
   @Test

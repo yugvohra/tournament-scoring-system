@@ -1,17 +1,18 @@
 package com.yug.scoringsystem.domain.game;
 
+import com.yug.scoringsystem.domain.IState;
 import com.yug.scoringsystem.domain.ScoreBoard;
 
 public class TangibleStatus {
-  private final State state;
+  private final IState state;
   private final ScoreBoard scoreBoard;
 
-  public TangibleStatus(State state, ScoreBoard scoreBoard) {
+  public TangibleStatus(IState state, ScoreBoard scoreBoard) {
     this.state = state;
     this.scoreBoard = scoreBoard;
   }
 
-  public State getState() {
+  public IState getState() {
     return state;
   }
 

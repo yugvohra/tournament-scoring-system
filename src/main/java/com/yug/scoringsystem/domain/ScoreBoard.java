@@ -14,11 +14,11 @@ public class ScoreBoard<T extends IScoredPoint> {
   private Player leadPlayer;
   private Long lead;
 
-  public ScoreBoard(List<Player> participatingPlayers) {
+  public ScoreBoard(Set<Player> participatingPlayers) {
     initialize(participatingPlayers);
   }
 
-  private void initialize(List<Player> participatingPlayers) {
+  private void initialize(Set<Player> participatingPlayers) {
     lead = 0L;
     playerScores = participatingPlayers.parallelStream().collect(Collectors.toMap(player -> player, player -> 0L));
   }
