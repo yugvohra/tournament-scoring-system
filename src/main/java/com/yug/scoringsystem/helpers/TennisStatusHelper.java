@@ -1,18 +1,18 @@
 package com.yug.scoringsystem.helpers;
 
-import com.yug.scoringsystem.converters.NormalGameStringConverter;
-import com.yug.scoringsystem.converters.IGameStringConverter;
-import com.yug.scoringsystem.converters.SetMessageConverter;
-import com.yug.scoringsystem.converters.TieBreakerGameStringConverter;
+import com.yug.scoringsystem.converters.game.NormalGameStringConverter;
+import com.yug.scoringsystem.converters.game.IGameStringConverter;
+import com.yug.scoringsystem.converters.set.SetMessageConverter;
+import com.yug.scoringsystem.converters.game.TieBreakerGameStringConverter;
 import com.yug.scoringsystem.domain.game.Game;
 import com.yug.scoringsystem.domain.TangibleStatus;
 import com.yug.scoringsystem.domain.set.TennisSet;
 
 import static com.yug.scoringsystem.domain.game.GameType.NORMAL;
 
-class TennisStatusHelper {
+public class TennisStatusHelper {
 
-  static TangibleStatus findStatusOfSet(TennisSet set) {
+  public static TangibleStatus findStatusOfSet(TennisSet set) {
     return new TangibleStatus(set.getState(), set.getScoreBoard());
 
   }
@@ -21,12 +21,12 @@ class TennisStatusHelper {
     return new TangibleStatus(game.getState(), game.getScoreBoard());
   }
 
-  static String getStatusMessageOfGame(Game game) {
+  public static String getStatusMessageOfGame(Game game) {
     IGameStringConverter messageConverter = game.getGameType() == NORMAL ? NormalGameStringConverter.getInstance() : TieBreakerGameStringConverter.getInstance();
     return messageConverter.fetchStringMessageFrom(findStatusOfGame(game));
   }
 
-  static String getStatusMessageOfSet(TennisSet aSet) {
+  public static String getStatusMessageOfSet(TennisSet aSet) {
     return SetMessageConverter.getInstance().fetchStringMessageFrom(findStatusOfSet(aSet));
   }
 

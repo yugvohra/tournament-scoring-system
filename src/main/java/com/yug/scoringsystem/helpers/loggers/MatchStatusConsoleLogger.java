@@ -1,10 +1,11 @@
-package com.yug.scoringsystem.helpers;
+package com.yug.scoringsystem.helpers.loggers;
 
 import com.yug.scoringsystem.domain.Match;
 import com.yug.scoringsystem.domain.TangibleStatus;
 import com.yug.scoringsystem.domain.set.TennisSet;
+import com.yug.scoringsystem.helpers.TennisStatusHelper;
 
-import static com.yug.scoringsystem.domain.set.states.SetState.WON;
+import static com.yug.scoringsystem.domain.set.SetState.WON;
 
 public class MatchStatusConsoleLogger implements IMatchStatusLogger {
 

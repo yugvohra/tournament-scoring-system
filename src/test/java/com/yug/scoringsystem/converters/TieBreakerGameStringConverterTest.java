@@ -1,5 +1,6 @@
 package com.yug.scoringsystem.converters;
 
+import com.yug.scoringsystem.converters.game.TieBreakerGameStringConverter;
 import com.yug.scoringsystem.domain.Player;
 import com.yug.scoringsystem.domain.ScoreBoard;
 import com.yug.scoringsystem.domain.TangibleStatus;
@@ -14,8 +15,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.yug.scoringsystem.domain.game.states.GameState.UNDECIDED_TIEBREAKER;
-import static com.yug.scoringsystem.domain.game.states.GameState.WON;
+import static com.yug.scoringsystem.domain.game.GameState.UNDECIDED_TIEBREAKER;
+import static com.yug.scoringsystem.domain.game.GameState.WON;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;

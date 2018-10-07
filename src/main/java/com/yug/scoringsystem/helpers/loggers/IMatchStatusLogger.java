@@ -1,4 +1,4 @@
-package com.yug.scoringsystem.helpers;
+package com.yug.scoringsystem.helpers.loggers;
 
 import com.yug.scoringsystem.domain.Match;
 

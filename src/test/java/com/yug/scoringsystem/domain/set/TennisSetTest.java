@@ -6,7 +6,6 @@ import com.yug.scoringsystem.domain.TennisIntegral;
 import com.yug.scoringsystem.domain.game.Game;
 import com.yug.scoringsystem.domain.game.GamePoint;
 import com.yug.scoringsystem.domain.game.GameType;
-import com.yug.scoringsystem.domain.set.states.SetState;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +15,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Optional;
 
-import static com.yug.scoringsystem.domain.set.states.SetState.UNDECIDED;
+import static com.yug.scoringsystem.domain.set.SetState.UNDECIDED;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;

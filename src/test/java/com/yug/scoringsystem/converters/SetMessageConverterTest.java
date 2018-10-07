@@ -1,5 +1,6 @@
 package com.yug.scoringsystem.converters;
 
+import com.yug.scoringsystem.converters.set.SetMessageConverter;
 import com.yug.scoringsystem.domain.Player;
 import com.yug.scoringsystem.domain.ScoreBoard;
 import com.yug.scoringsystem.domain.TangibleStatus;
@@ -14,8 +15,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.yug.scoringsystem.domain.set.states.SetState.UNDECIDED;
-import static com.yug.scoringsystem.domain.set.states.SetState.WON;
+import static com.yug.scoringsystem.domain.set.SetState.UNDECIDED;
+import static com.yug.scoringsystem.domain.set.SetState.WON;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;

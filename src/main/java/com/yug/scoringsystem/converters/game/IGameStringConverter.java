@@ -1,4 +1,4 @@
-package com.yug.scoringsystem.converters;
+package com.yug.scoringsystem.converters.game;
 
 import com.yug.scoringsystem.domain.TangibleStatus;
 

@@ -1,5 +1,9 @@
 package com.yug.scoringsystem.domain;
 
+/**
+ * used to beautify the match score
+ *
+ * */
 public class TangibleStatus {
   private final IState state;
   private final ScoreBoard scoreBoard;

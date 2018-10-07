@@ -6,11 +6,10 @@ import com.yug.scoringsystem.domain.ScoreBoard;
 import com.yug.scoringsystem.domain.TennisIntegral;
 import com.yug.scoringsystem.domain.game.Game;
 import com.yug.scoringsystem.domain.game.GameType;
-import com.yug.scoringsystem.domain.set.states.SetState;
 
 import java.util.Set;
 
-import static com.yug.scoringsystem.domain.set.states.SetState.UNDECIDED;
+import static com.yug.scoringsystem.domain.set.SetState.UNDECIDED;
 
 public class TennisSet {
   private final String setId;

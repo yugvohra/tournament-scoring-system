@@ -1,9 +1,9 @@
 package com.yug.scoringsystem.main;
 
-import com.yug.scoringsystem.helpers.MatchStatusConsoleLogger;
+import com.yug.scoringsystem.helpers.loggers.MatchStatusConsoleLogger;
 import com.yug.scoringsystem.processors.MatchProcessor;
 
-import static com.yug.scoringsystem.domain.set.states.SetState.WON;
+import static com.yug.scoringsystem.domain.set.SetState.WON;
 
 
 public class TennisGameRunner {

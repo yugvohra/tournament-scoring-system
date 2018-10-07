@@ -3,7 +3,6 @@ package com.yug.scoringsystem.domain.game;
 import com.yug.scoringsystem.domain.Player;
 import com.yug.scoringsystem.domain.ScoreBoard;
 import com.yug.scoringsystem.domain.TennisIntegral;
-import com.yug.scoringsystem.domain.game.states.GameState;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

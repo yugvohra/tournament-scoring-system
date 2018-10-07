@@ -1,4 +1,4 @@
-package com.yug.scoringsystem.domain.set.states;
+package com.yug.scoringsystem.domain.set;
 
 import com.yug.scoringsystem.domain.IState;
 import com.yug.scoringsystem.domain.Player;

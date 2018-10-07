@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.yug.scoringsystem.domain.game.Game</OriginalElement>
+  <nodes>
+    <node x="52.39657859078625" y="943.0">com.yug.scoringsystem.domain.game.Game</node>
+    <node x="745.4509146341464" y="1327.0">com.yug.scoringsystem.processors.MatchProcessor</node>
+    <node x="589.2908875338755" y="0.0">com.yug.scoringsystem.domain.Player</node>
+    <node x="931.8799119241196" y="1064.5">com.yug.scoringsystem.domain.Match</node>
+    <node x="10.5" y="722.0">com.yug.scoringsystem.domain.game.GameState</node>
+    <node x="188.63997289972906" y="582.0">com.yug.scoringsystem.domain.IState</node>
+    <node x="479.8799119241196" y="1051.0">com.yug.scoringsystem.converters.set.SetMessageConverter</node>
+    <node x="297.7299119241196" y="225.0">com.yug.scoringsystem.domain.ScoreBoard</node>
+    <node x="579.4609756097561" y="749.0">com.yug.scoringsystem.domain.set.SetState</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.yug.scoringsystem.processors.MatchProcessor" target="com.yug.scoringsystem.domain.game.Game">
+      <point x="-106.66666666666652" y="-140.0" />
+      <point x="798.7842479674799" y="1297.0" />
+      <point x="251.39657859078625" y="1297.0" />
+      <point x="0.0" y="167.0" />
+    </edge>
+    <edge source="com.yug.scoringsystem.domain.game.GameState" target="com.yug.scoringsystem.domain.ScoreBoard">
+      <point x="-26.875" y="-85.5" />
+      <point x="91.125" y="562.0" />
+      <point x="330.7299119241196" y="562.0" />
+      <point x="-132.0" y="153.5" />
+    </edge>
+    <edge source="com.yug.scoringsystem.processors.MatchProcessor" target="com.yug.scoringsystem.domain.game.GameState">
+      <point x="-142.22222222222206" y="-140.0" />
+      <point x="763.2286924119244" y="1307.0" />
+      <point x="41.89657859078625" y="1307.0" />
+      <point x="41.89657859078625" y="923.0" />
+      <point x="64.25" y="923.0" />
+      <point x="-53.75" y="85.5" />
+    </edge>
+    <edge source="com.yug.scoringsystem.domain.set.SetState" target="com.yug.scoringsystem.domain.IState">
+      <point x="-15.875" y="-58.5" />
+      <point x="627.0859756097561" y="692.0" />
+      <point x="465.47330623306243" y="692.0" />
+      <point x="125.83333333333337" y="45.0" />
+    </edge>
+    <edge source="com.yug.scoringsystem.processors.MatchProcessor" target="com.yug.scoringsystem.domain.Player">
+      <point x="-35.55555555555543" y="-140.0" />
+      <point x="869.895359078591" y="1307.0" />
+      <point x="899.3799119241196" y="1307.0" />
+      <point x="899.3799119241196" y="185.0" />
+      <point x="768.5408875338755" y="185.0" />
+      <point x="59.75" y="72.5" />
+    </edge>
+    <edge source="com.yug.scoringsystem.domain.set.SetState" target="com.yug.scoringsystem.domain.ScoreBoard">
+      <point x="15.875" y="-58.5" />
+      <point x="658.8359756097561" y="562.0" />
+      <point x="528.7299119241196" y="562.0" />
+      <point x="66.0" y="153.5" />
+    </edge>
+    <edge source="com.yug.scoringsystem.converters.set.SetMessageConverter" target="com.yug.scoringsystem.domain.set.SetState">
+      <point x="-99.5" y="-59.0" />
+      <point x="579.3799119241196" y="923.0" />
+      <point x="642.9609756097561" y="923.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.yug.scoringsystem.domain.IState" target="com.yug.scoringsystem.domain.ScoreBoard">
+      <point x="0.0" y="-45.0" />
+      <point x="339.63997289972906" y="562.0" />
+      <point x="396.7299119241196" y="562.0" />
+      <point x="-66.0" y="153.5" />
+    </edge>
+    <edge source="com.yug.scoringsystem.domain.game.Game" target="com.yug.scoringsystem.domain.game.GameState">
+      <point x="-79.60000000000002" y="-167.0" />
+      <point x="53.75" y="85.5" />
+    </edge>
+    <edge source="com.yug.scoringsystem.domain.ScoreBoard" target="com.yug.scoringsystem.domain.Player">
+      <point x="-109.99999999999994" y="-153.5" />
+      <point x="352.7299119241197" y="185.0" />
+      <point x="649.0408875338755" y="185.0" />
+      <point x="-59.75" y="72.5" />
+    </edge>
+    <edge source="com.yug.scoringsystem.domain.set.SetState" target="com.yug.scoringsystem.domain.Player">
+      <point x="47.625" y="-58.5" />
+      <point x="690.5859756097561" y="702.0" />
+      <point x="771.9609756097561" y="702.0" />
+      <point x="771.9609756097561" y="205.0" />
+      <point x="720.7408875338756" y="205.0" />
+      <point x="11.950000000000045" y="72.5" />
+    </edge>
+    <edge source="com.yug.scoringsystem.converters.set.SetMessageConverter" target="com.yug.scoringsystem.domain.ScoreBoard">
+      <point x="99.5" y="-59.0" />
+      <point x="778.3799119241196" y="923.0" />
+      <point x="716.9609756097561" y="923.0" />
+      <point x="716.9609756097561" y="552.0" />
+      <point x="594.7299119241197" y="552.0" />
+      <point x="132.00000000000006" y="153.5" />
+    </edge>
+    <edge source="com.yug.scoringsystem.domain.game.GameState" target="com.yug.scoringsystem.domain.Player">
+      <point x="-80.625" y="-85.5" />
+      <point x="37.375" y="702.0" />
+      <point x="45.5625" y="702.0" />
+      <point x="45.5625" y="175.0" />
+      <point x="625.1408875338756" y="175.0" />
+      <point x="-83.64999999999998" y="72.5" />
+    </edge>
+    <edge source="com.yug.scoringsystem.processors.MatchProcessor" target="com.yug.scoringsystem.domain.Match">
+      <point x="106.66666666666674" y="-140.0" />
+      <point x="1012.1175813008132" y="1297.0" />
+      <point x="1054.3799119241196" y="1297.0" />
+      <point x="0.0" y="45.5" />
+    </edge>
+    <edge source="com.yug.scoringsystem.domain.game.GameState" target="com.yug.scoringsystem.domain.IState">
+      <point x="80.625" y="-85.5" />
+      <point x="198.625" y="702.0" />
+      <point x="264.13997289972906" y="702.0" />
+      <point x="-75.5" y="45.0" />
+    </edge>
+    <edge source="com.yug.scoringsystem.domain.game.Game" target="com.yug.scoringsystem.domain.ScoreBoard">
+      <point x="159.20000000000005" y="-167.0" />
+      <point x="410.5965785907863" y="923.0" />
+      <point x="501.13997289972906" y="923.0" />
+      <point x="501.13997289972906" y="562.0" />
+      <point x="462.7299119241196" y="562.0" />
+      <point x="0.0" y="153.5" />
+    </edge>
+    <edge source="com.yug.scoringsystem.domain.game.Game" target="com.yug.scoringsystem.domain.IState">
+      <point x="0.0" y="-167.0" />
+      <point x="251.39657859078625" y="923.0" />
+      <point x="279.68333333333345" y="923.0" />
+      <point x="279.68333333333345" y="702.0" />
+      <point x="314.47330623306243" y="702.0" />
+      <point x="-25.16666666666663" y="45.0" />
+    </edge>
+    <edge source="com.yug.scoringsystem.domain.game.Game" target="com.yug.scoringsystem.domain.Player">
+      <point x="-159.20000000000005" y="-167.0" />
+      <point x="92.1965785907862" y="913.0" />
+      <point x="0.0" y="913.0" />
+      <point x="0.0" y="165.0" />
+      <point x="601.2408875338756" y="165.0" />
+      <point x="-107.54999999999995" y="72.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8172757475083057" x="199.0" y="140.5" />
+  <SelectedNodes>
+    <node>com.yug.scoringsystem.domain.Player</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
