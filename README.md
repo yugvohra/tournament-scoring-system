@@ -10,4 +10,5 @@ Both Set and Game Objects maintain their states
 To run this programm 
 1) Execute the TennisRunner (Main) class. This will randomize the complete match and the output of each scored point is logged on the console
 2) Run MatchProcessorIntegrationTest .This test takes care of few scenarios in an ordinary tennis match
- 
+==================================================================================================================================================
+Test does not cover the consoleLogger and TangibleStatus that is used to convert the GameState into readable messages
