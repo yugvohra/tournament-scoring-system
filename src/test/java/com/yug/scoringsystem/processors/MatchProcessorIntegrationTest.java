@@ -29,7 +29,7 @@ public class MatchProcessorIntegrationTest {
     ScoreBoard<GamePoint> gameScoreBoard = matchProcessor.getMatch().getTennisSet().getCurrentGame().getScoreBoard();
 
     assertThat(setScoreBoard.getPlayerScore(setScoreBoard.getLeadPlayer().get())).isEqualTo(1L);
-    assertThat(matchProcessor.getMatch().getTennisSet().getState()).isEqualTo(UNDECIDED);
+    assertThat(matchProcessor.getMatch().getTennisSet().getSetState()).isEqualTo(UNDECIDED);
     assertThat(gameScoreBoard.getPlayerScore(gameScoreBoard.getLeadPlayer().get())).isEqualTo(1L);
   }
 

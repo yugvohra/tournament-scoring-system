@@ -3,7 +3,6 @@ package com.yug.scoringsystem.domain.game;
 import com.yug.scoringsystem.domain.IState;
 import com.yug.scoringsystem.domain.Player;
 import com.yug.scoringsystem.domain.ScoreBoard;
-import com.yug.scoringsystem.domain.game.GamePoint;
 
 import java.util.Optional;
 

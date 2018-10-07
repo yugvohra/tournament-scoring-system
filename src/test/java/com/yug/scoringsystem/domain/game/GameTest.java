@@ -14,7 +14,9 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameTest {
@@ -72,11 +74,7 @@ public class GameTest {
   public void shouldReturnAdvantageWhenPlayerHasIt() {
     //given
     //the state should be deuce
-    when(aScoreBoard.getLead()).thenReturn(0L);
-    when(aScoreBoard.getPlayerScore(any())).thenReturn(5L);
-    when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player("player one")));
-    subject.addAPoint(new GamePoint(new Player("player one")));
-
+    Whitebox.setInternalState(subject, "gameState", GameState.DEUCE);
     when(aScoreBoard.getLead()).thenReturn(1L);
     when(aScoreBoard.getPlayerScore(any())).thenReturn(5L);
     when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player("player one")));
@@ -86,8 +84,35 @@ public class GameTest {
     assertThat(subject.getState()).isEqualTo(GameState.ADVANTAGE);
   }
 
+
+  @Test
+  public void shouldReturnDeuceWhenAdvantageIsLost() {
+    //given
+    //stats is advantage
+    Whitebox.setInternalState(subject, "gameState", GameState.ADVANTAGE);
+    when(aScoreBoard.getLead()).thenReturn(0L);
+    when(aScoreBoard.getPlayerScore(any())).thenReturn(5L);
+    when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player("player one")));
+    //when
+    subject.addAPoint(new GamePoint(new Player("player one")));
+    //then
+    assertThat(subject.getState()).isEqualTo(GameState.DEUCE);
+  }
+
   @Test
   public void shouldReturnWonWhenGameEnds() {
+    //given
+    Whitebox.setInternalState(subject, "gameState", GameState.WON);
+    //when
+    subject.addAPoint(new GamePoint(new Player("player one")));
+    //then
+    assertThat(subject.getState()).isEqualTo(GameState.WON);
+    verify(tennisIntegral, times(0)).getScoreBoard();
+  }
+
+
+  @Test
+  public void ShouldNotChangeStateWhenGameEnds() {
     //given
     when(aScoreBoard.getLead()).thenReturn(2L);
     when(aScoreBoard.getPlayerScore(any())).thenReturn(5L);
@@ -98,6 +123,7 @@ public class GameTest {
     //then
     assertThat(subject.getState()).isEqualTo(GameState.WON);
   }
+
 
   @Test
   public void shouldBeAbleToAddAPoint() {

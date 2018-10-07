@@ -17,6 +17,6 @@ public class TennisGameRunner {
       matchProcessor.pointWonBy(playersNames[playerIdx]);
       matchProcessor.showScore();
 
-    } while (matchProcessor.getMatch().getTennisSet().getState() != WON);
+    } while (matchProcessor.getMatch().getTennisSet().getSetState() != WON);
   }
 }

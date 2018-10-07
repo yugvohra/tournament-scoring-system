@@ -13,7 +13,7 @@ import static com.yug.scoringsystem.domain.game.GameType.NORMAL;
 public class TennisStatusHelper {
 
   public static TangibleStatus findStatusOfSet(TennisSet set) {
-    return new TangibleStatus(set.getState(), set.getScoreBoard());
+    return new TangibleStatus(set.getSetState(), set.getScoreBoard());
 
   }
 

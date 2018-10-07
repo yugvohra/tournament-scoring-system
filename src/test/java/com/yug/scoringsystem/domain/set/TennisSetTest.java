@@ -18,7 +18,9 @@ import java.util.Optional;
 import static com.yug.scoringsystem.domain.set.SetState.UNDECIDED;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TennisSetTest {
@@ -44,7 +46,7 @@ public class TennisSetTest {
     when(aScoreBoard.getLead()).thenReturn(0L);
     when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.empty());
     //when
-    assertThat(subject.getState()).isEqualTo(UNDECIDED);
+    assertThat(subject.getSetState()).isEqualTo(UNDECIDED);
   }
 
   @Test
@@ -57,7 +59,7 @@ public class TennisSetTest {
     //when
     subject.addAPoint(new SetPoint(game, new Player("player one")));
     //then
-    assertThat(subject.getState()).isEqualTo(SetState.UNDECIDED);
+    assertThat(subject.getSetState()).isEqualTo(SetState.UNDECIDED);
   }
 
   @Test
@@ -70,7 +72,7 @@ public class TennisSetTest {
     //when
     subject.addAPoint(new SetPoint(game, new Player("player one")));
     //then
-    assertThat(subject.getState()).isEqualTo(SetState.WON);
+    assertThat(subject.getSetState()).isEqualTo(SetState.WON);
   }
 
   @Test
@@ -84,7 +86,7 @@ public class TennisSetTest {
     //when
     subject.addAPoint(new SetPoint(game, new Player("player one")));
     //then
-    assertThat(subject.getState()).isEqualTo(SetState.WON);
+    assertThat(subject.getSetState()).isEqualTo(SetState.WON);
   }
 
 
@@ -97,7 +99,7 @@ public class TennisSetTest {
     //when
     subject.addAPoint(new SetPoint(game, new Player("player one")));
     //then
-    assertThat(subject.getState()).isEqualTo(SetState.TIE);
+    assertThat(subject.getSetState()).isEqualTo(SetState.TIE);
   }
 
   @Test
@@ -106,22 +108,16 @@ public class TennisSetTest {
     when(aScoreBoard.getLead()).thenReturn(1L);
     when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player(" player 1")));
     when(aScoreBoard.getPlayerScore(any())).thenReturn(6L);
-
-    //when
     //when
     subject.addAPoint(new SetPoint(game, new Player("player one")));
     //then
-    assertThat(subject.getState()).isEqualTo(SetState.UNDECIDED);
+    assertThat(subject.getSetState()).isEqualTo(SetState.UNDECIDED);
   }
 
   @Test
   public void shouldReturWonStateWhenTrailingGameEnds() {
     //given state is TIE
-    when(aScoreBoard.getLead()).thenReturn(0L);
-    when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player(" player 1")));
-    when(aScoreBoard.getPlayerScore(any())).thenReturn(6L);
-    //when
-    subject.addAPoint(new SetPoint(game, new Player("player one")));
+    Whitebox.setInternalState(subject, "setState", SetState.TIE);
     //then
     when(aScoreBoard.getLead()).thenReturn(1L);
     when(aScoreBoard.getLeadPlayer()).thenReturn(Optional.of(new Player(" player 1")));
@@ -130,7 +126,20 @@ public class TennisSetTest {
     //when
     subject.addAPoint(new SetPoint(game, new Player("player one")));
     //then
-    assertThat(subject.getState()).isEqualTo(SetState.WON);
+    assertThat(subject.getSetState()).isEqualTo(SetState.WON);
+  }
+
+
+  @Test
+  public void ShouldNotChangeStateOfFinishedSet() {
+    //given state is TIE
+    Whitebox.setInternalState(subject, "setState", SetState.WON);
+
+    //when
+    subject.addAPoint(new SetPoint(game, new Player("player one")));
+    //then
+    assertThat(subject.getSetState()).isEqualTo(SetState.WON);
+    verify(subject,times(0)).getScoreBoard();
   }
 
 

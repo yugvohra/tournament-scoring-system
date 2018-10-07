@@ -15,22 +15,22 @@ public class TennisSet {
   private final String setId;
   private TennisIntegral<SetPoint> tennisIntegral;
   private Game currentGame;
-  private IState<SetPoint> state;
+  private IState<SetPoint> setState;
 
   public TennisSet(String setId, Player playerOne, Player playerTwo) {
     this.setId = setId;
     /**First game should be of type normal*/
     currentGame = new Game(playerOne, playerTwo, GameType.NORMAL);
     tennisIntegral = new TennisIntegral<>(playerOne, playerTwo);
-    state = UNDECIDED;
+    setState = UNDECIDED;
   }
 
   public TennisSet(Player playerOne, Player playerTwo) {
     this(String.format("%s VS %s", playerOne.getName(), playerTwo.getName()), playerOne, playerTwo);
   }
 
-  public IState<SetPoint> getState() {
-    return state;
+  public IState<SetPoint> getSetState() {
+    return setState;
   }
 
   public Game getCurrentGame() {
@@ -38,9 +38,9 @@ public class TennisSet {
   }
 
   public void addANewGaMe() {
-    if (this.state == SetState.UNDECIDED)
+    if (this.setState == SetState.UNDECIDED)
       currentGame = new Game(getTennisIntegral().getScoreBoard().getParticipatingPlayers(), GameType.NORMAL);
-    else if (this.state == SetState.TIE)
+    else if (this.setState == SetState.TIE)
       currentGame = new Game(getTennisIntegral().getScoreBoard().getParticipatingPlayers(), GameType.TIE_BREAKER);
   }
 
@@ -58,10 +58,10 @@ public class TennisSet {
   }
 
   public void addAPoint(SetPoint aPoint) {
-    if (!this.state.canTransition())
+    if (!this.setState.canTransition())
       return;
     getTennisIntegral().addAPoint(aPoint);
-    this.state = state.nextState(getTennisIntegral().getScoreBoard());
+    this.setState = setState.nextState(getTennisIntegral().getScoreBoard());
   }
 
   public ScoreBoard getScoreBoard() {
