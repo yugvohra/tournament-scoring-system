@@ -12,4 +12,4 @@ To run this programm
 2) Run MatchProcessorIntegrationTest .This test takes care of few scenarios in an ordinary tennis match
 ==================================================================================================================================================
 
-Test cases do not cover the consoleLogger and TangibleStatus that is used to convert the GameState into readable messages
+Test cases do not cover the consoleLogger and TangibleStatus that are used to convert the GameState into readable messages
